@@ -1,0 +1,67 @@
+services:
+  # ============================================================================
+  # SERVIÇO DO BANCO DE DADOS (PostgreSQL)
+  # ============================================================================
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-auth_db}
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-123}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck: 
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ============================================================================
+  # SERVIÇO DO BACKEND (NestJS)
+  # ============================================================================
+  backend:
+    build:
+      context: ./backend 
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000" 
+    environment: 
+      DB_HOST: db 
+      DB_DATABASE: ${DB_DATABASE:-auth_db}
+      DB_USERNAME: ${DB_USERNAME:-user}
+      DB_PASSWORD: ${DB_PASSWORD:-password}
+      DB_PORT: 5432 
+      JWT_SECRET: ${JWT_SECRET:-your_super_secret_jwt_key} 
+    depends_on:
+      db: #
+        condition: service_healthy 
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # ============================================================================
+  # SERVIÇO DO FRONTEND (React/Vite com Nginx)
+  # ============================================================================
+  frontend:
+    build:
+      context: ./login-front 
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80" 
+    depends_on:
+      - backend 
+    networks:
+      - app-network
+    restart: unless-stopped
+
+
+volumes:
+  db_data:
+
+
+networks:
+  app-network:
+    driver: bridge

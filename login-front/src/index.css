@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+body {
+  font-family: 'Inter', sans-serif; /* Usando uma fonte sans-serif padrão */
+  background-color: #f3f4f6; /* Um fundo cinza claro para a aplicação */
+}
