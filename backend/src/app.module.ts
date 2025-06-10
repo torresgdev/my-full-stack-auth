@@ -17,6 +17,17 @@ import { User } from './users/user.entity';
   useFactory: (configService: ConfigService) => {
     const dbUrl = configService.get<string>('DATABASE_URL');
 
+     const commonOptions = {
+          autoLoadEntities: true,
+          synchronize: false,
+          logging: ['error'], 
+          entities: [User],
+         
+          ssl: {
+            rejectUnauthorized: false,
+          },
+        };
+
     
     if (dbUrl) {
       return {
