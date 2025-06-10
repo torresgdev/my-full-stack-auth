@@ -17,6 +17,7 @@ import { LogLevel } from 'typeorm'
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => {
         const dbUrl = configService.get<string>('DATABASE_URL');
+
         const commonOptions = {
           autoLoadEntities: true,
           entities: [User], 
@@ -37,6 +38,7 @@ import { LogLevel } from 'typeorm'
             type: 'postgres',
             url: dbUrl,      
             ...commonOptions, 
+            synchronize: true,
             ...sslOptions,    
           };
         } else {
