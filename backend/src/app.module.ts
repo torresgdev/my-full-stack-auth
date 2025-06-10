@@ -13,24 +13,36 @@ import { User } from './users/user.entity';
       isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
+  imports: [ConfigModule],
+  useFactory: (configService: ConfigService) => {
+    const dbUrl = configService.get<string>('DATABASE_URL');
+
+    
+    if (dbUrl) {
+      return {
         type: 'postgres',
-        host: configService.get<string>('DB_HOST', 'db'),
-        port: configService.get<number>('DB_PORT', 5432),
-        username: configService.get<string>('DB_USERNAME', 'postgres'),
-        password: configService.get<string>('DB_PASSWORD', '123'),
-        database: configService.get<string>('DB_DATABASE', 'auth_db'),
-        entities: [User],
-
-        synchronize: true,
-
+        url: dbUrl,
         autoLoadEntities: true,
-        logging:['query', 'error']
-      }),
-
-      inject: [ConfigService]
-    }),
+        synchronize: false, 
+        logging: ['error'], 
+      };
+    } else {
+    
+      return {
+        type: 'postgres',
+        host: configService.get<string>('DB_HOST', 'db'), 
+        port: configService.get<number>('DB_PORT', 5432),
+        username: configService.get<string>('DB_USERNAME', 'user'), 
+        password: configService.get<string>('DB_PASSWORD', 'password'), 
+        database: configService.get<string>('DB_DATABASE', 'auth_db'),
+        autoLoadEntities: true,
+        synchronize: false, 
+        logging: ['error'], 
+      };
+    }
+  },
+  inject: [ConfigService],
+}),
     UsersModule,
     AuthModule
   ],
