@@ -38,7 +38,7 @@ import { LogLevel } from 'typeorm'
             type: 'postgres',
             url: dbUrl,      
             ...commonOptions, 
-            synchronize: true,
+            synchronize: false,
             ...sslOptions,    
           };
         } else {
