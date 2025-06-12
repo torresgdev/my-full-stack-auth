@@ -1,19 +1,43 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
+import ShoppingList from "../components/ui/ShoppingList";
+import type{ User } from "../types";
+import { useAuth } from "../hooks/useAuth";
 
 const DashboardPage: React.FC = () => {
-    return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-800 text-white p-4">
-            <h1 className="text-5xl font-extrabold mb-6 animate-pulse">
-                🎉 Bem-vindo! 🎉
-            </h1>
-            <p className="text-xl text-gray-300 mb-8">Você acessou sua dashboard com Sucesso</p>
+    const {isAuthenticated, logout, user} = useAuth() as {isAuthenticated: boolean; logout: () => void; user:User | null}
 
-            <Link
-                to="/login"
-                className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
-                    Sair
-                </Link>
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState<boolean>(true);
+
+    useEffect(()=> {
+        if(!isAuthenticated) {
+            navigate('/login')
+        } else {
+            setLoading(false)
+        }
+
+    }, [isAuthenticated, navigate])
+
+    if (loading) {
+        return <p className="text-center text-lg text-gray-600 mt-8">Carregando dashboard...</p>;
+    }
+    return (
+        <div className="min-h-screen bg-gray-100 p-8">
+            <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-xl p-8">
+                <h1 className="text-4xl font-extrabold text-gray-900 mb-6 text-center">
+                    Bem-vindo, <span className="text-blue-600">{user?.email || 'Usuário'}</span>!
+                </h1>
+                 <p className="text-xl text-gray-700 mb-10 text-center">Este é o seu dashboard pessoal.</p>
+
+                  <ShoppingList />
+
+                  <button
+                    onClick={logout}
+                    className="block w-fit mx-aut mt-12 px-8 py-3 bg-red-600 text-white font-bold text-lg rounded-lg shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-200 ease-in-out">
+                        Sair
+                    </button>
+            </div>
         </div>
     )
 };
