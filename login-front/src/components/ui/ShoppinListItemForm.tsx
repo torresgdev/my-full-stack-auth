@@ -14,7 +14,7 @@ interface ShoppingListAddItemFormProps {
 
 const ShoppingListAddItemForm: React.FC<ShoppingListAddItemFormProps> = ({ onItemAdded }) => {
   const { values, errors, loading, handleChange, handleSubmit } = useForm<AddItemFormValues>(
-    { name: '', quantity: '1' }, // Valores iniciais para nome e quantidade
+    { name: '', quantity: '1' }, 
     {
       name: (value) => (!value.trim() ? 'O nome do item é obrigatório.' : null),
       quantity: (value) => {
