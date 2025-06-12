@@ -2,7 +2,7 @@
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://my-auth-backend-595w.onrender.com'; 
 
 export const registerUser = async (email: string, password: string): Promise<any> => {
-    const response = await fetch(`${BASE_URL}/auth/signup`, { 
+    const response = await fetch(`${BASE_URL}/auth/register`, { 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ export const registerUser = async (email: string, password: string): Promise<any
 
 
 export const loginUser = async (email: string, password: string): Promise<{ accessToken: string; user: { id: string; email: string } }> => {
-    const response = await fetch(`${BASE_URL}/auth/signin`, { 
+    const response = await fetch(`${BASE_URL}/auth/login`, { 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
