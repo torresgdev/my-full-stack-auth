@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { User } from './users/user.entity';
 import { LogLevel } from 'typeorm'
+import { ShoppingListModule } from './shopping-list/shopping-list.module';
 
 @Module({
   imports: [
@@ -61,6 +62,7 @@ import { LogLevel } from 'typeorm'
     }),
     UsersModule,
     AuthModule,
+    ShoppingListModule,
   ],
   controllers: [AppController],
   providers: [AppService],
