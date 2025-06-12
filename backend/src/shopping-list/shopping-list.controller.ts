@@ -2,8 +2,10 @@ import { Controller, Post, Get, Patch, Body, Param, UseGuards, Request, HttpCode
 import { ShoppingListService } from './shopping-list.service';
 import { CreateShoppinListItemDto } from './dto/create-shopping-list-item.dto';
 import { UpdateShoppingListItemDto } from './dto/update-shopping-list-item.dto';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 
+@UseGuards(JwtAuthGuard)
 @Controller('shopping-list')
 export class ShoppingListController {
     constructor(private readonly shoppingListService: ShoppingListService){}
