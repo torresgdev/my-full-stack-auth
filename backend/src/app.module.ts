@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { User } from './users/user.entity';
 import { LogLevel } from 'typeorm'
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
+import { ShoppingListItem } from './shopping-list/shopping-list-item.entity';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { ShoppingListModule } from './shopping-list/shopping-list.module';
 
         const commonOptions = {
           autoLoadEntities: true,
-          entities: [User], 
+          entities: [User, ShoppingListItem], 
           synchronize: false, 
           logging: ['error'] as LogLevel[], 
         };
