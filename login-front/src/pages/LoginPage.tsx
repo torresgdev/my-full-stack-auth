@@ -38,8 +38,8 @@ const LoginPage: React.FC = () => {
 
     try {
       const response = await loginUser(data.email, data.password);
-      localStorage.setItem('access_token', response.access_token);
-      console.log('Token de acesso: ', response.access_token);
+      localStorage.setItem('access_token', response.accessToken);
+      console.log('Token de acesso: ', response.accessToken);
 
       setSubmissionMessage("Login realizado com Sucesso ! Redirencionando...");
       setIsSuccessMessage(true);
