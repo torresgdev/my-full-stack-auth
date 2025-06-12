@@ -109,7 +109,7 @@ const RegisterPage: React.FC = () => {
                     error = {errors.confirmPassword}
                     disabled={loading} />
 
-                <Button type="submit" isLoading={loading} className="mt-4 p-3 w-50 rounded-2xl bg-gradient-to-r from-blue-500 to-pink-500 hover:bg-gradient-to-l hover:from-pink-700 to-purple-500 transition-colors duration-100">
+                <Button type="submit" isLoading={loading} className="mt-4 p-3 w-50 rounded-2xl bg-gradient-to-r from-blue-500 to-pink-500 hover:bg-gradient-to-l hover:from-pink-700 transition-colors duration-100">
                         Registrar
                 </Button>
             </form>
