@@ -19,7 +19,7 @@ const ShoppingList: React.FC = () => {
         setLoading(true);
         setError(null); 
         try {
-            const response = await api.get<ShoppingListItem[]>('/shoppin-list'); 
+            const response = await api.get<ShoppingListItem[]>('/shopping-list'); 
             setItems(response.data);
         } catch (err) {
             console.error('Error ao buscar items da lista: ', err);
