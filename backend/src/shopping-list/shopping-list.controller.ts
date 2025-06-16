@@ -26,7 +26,7 @@ export class ShoppingListController {
         return this.shoppingListService.findOne(id, req.user.id)
     }
 
-    @Get(':id')
+    @Patch(':id')
     update(@Param('id') id: string,@Body() updateDto: UpdateShoppingListItemDto, @Request() req) {
         return this.shoppingListService.update(id, updateDto, req.user.id)
     }
