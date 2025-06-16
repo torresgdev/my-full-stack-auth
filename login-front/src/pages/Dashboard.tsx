@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import ShoppingList from "../components/ui/ShoppingList";
+import { useNavigate, Link } from "react-router-dom";
 import DashboardHeader from "../components/ui/DashboardHeader"; 
 import { useAuth } from "../hooks/useAuth"; 
 
@@ -40,7 +39,14 @@ const DashboardPage: React.FC = () => {
             
             <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-xl mt-8 p-8"> {/* Container principal do conteúdo */}
                 <h2 className="text-4xl font-extrabold text-gray-900 text-center mb-8">Bem-vindo ao seu Painel!</h2>
-                <ShoppingList /> {/* Seu componente de lista de compras */}
+                <div className="text-center mt-6"> 
+                    <Link 
+                        to="/shopping-list" 
+                        className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-xl transition duration-300 ease-in-out shadow-md"
+                    >
+                        🛒 Ver Minha Lista de Compras
+                    </Link>
+</div>          
             </div>
         </div>
     );
