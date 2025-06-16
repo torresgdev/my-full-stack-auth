@@ -23,7 +23,7 @@ import { ShoppingListItem } from './shopping-list/shopping-list-item.entity';
         const commonOptions = {
           autoLoadEntities: true,
           entities: [User, ShoppingListItem], 
-          synchronize: false, 
+          synchronize: true, 
           logging: ['error'] as LogLevel[], 
         };
 
@@ -40,7 +40,7 @@ import { ShoppingListItem } from './shopping-list/shopping-list-item.entity';
             type: 'postgres',
             url: dbUrl,      
             ...commonOptions, 
-            synchronize: false,
+            synchronize: true,
             ...sslOptions,    
           };
         } else {

@@ -2,14 +2,14 @@ import React, {useState, useEffect } from "react";
 import api from "../../api/api";
 import { useAuth } from "../../hooks/useAuth";
 import type { ShoppingListItem } from "../../types";
-import ShoppingListAddItemForm from "./ShoppinListItemForm"; // Typo here, should be ShoppingListItemForm
+import ShoppingListAddItemForm from "./ShoppinListItemForm"; 
 
 const ShoppingList: React.FC = () => {
     const { user, isAuthenticated } = useAuth();
 
     const [items, setItems] = useState<ShoppingListItem[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null); // This is the 'error' variable
+    const [error, setError] = useState<string | null>(null); 
 
     const fetchItems = async () => {
         if(!isAuthenticated || !user) {
@@ -17,9 +17,9 @@ const ShoppingList: React.FC = () => {
             return;
         }
         setLoading(true);
-        setError(null); // Clear previous errors on new fetch attempt
+        setError(null); 
         try {
-            const response = await api.get<ShoppingListItem[]>('/shoppin-list'); // Typo here, should be /shopping-list
+            const response = await api.get<ShoppingListItem[]>('/shoppin-list'); 
             setItems(response.data);
         } catch (err) {
             console.error('Error ao buscar items da lista: ', err);
@@ -31,13 +31,13 @@ const ShoppingList: React.FC = () => {
 
     useEffect(()=> {
         fetchItems();
-    }, [isAuthenticated, user]); // Dependency array should include fetchItems if it's not memoized
+    }, [isAuthenticated, user]); 
 
     const handleItemAdded = (newItem: ShoppingListItem) => {
         setItems((prevItems) => [...prevItems, newItem]);
     };
 
-    const hangleTogglerPurchased = async (id: string, currentStatus: boolean) => { // Typo here, should be handleTogglerPurchased
+    const hangleTogglerPurchased = async (id: string, currentStatus: boolean) => { 
         try {
             const response = await api.patch<ShoppingListItem>(`/shopping-list/${id}`, {isPurchased: !currentStatus});
             setItems(items.map(item =>
@@ -45,7 +45,7 @@ const ShoppingList: React.FC = () => {
             ));
         } catch (err) {
             console.error('Erro ao atualizar item: ', err);
-            setError('Não foi possível atualizar o status do item.'); // Using 'setError'
+            setError('Não foi possível atualizar o status do item.'); 
         }
     };
 
@@ -55,7 +55,7 @@ const ShoppingList: React.FC = () => {
             setItems(items.filter(item => item.id !== id));
         } catch (err) {
             console.error('Error ao remover Item: ', err);
-            setError('Não foi possível remover o item.'); // Using 'setError'
+            setError('Não foi possível remover o item.'); 
         }
     };
 
@@ -68,7 +68,7 @@ const ShoppingList: React.FC = () => {
         <div className="mt-10 p-6 bg-white border border-gray-200 rounded-lg shadow-md max-w-2xl mx-auto">
             <h2 className="text-3xl font-semibold text-gray-800 mb-6 text-center border-b pb-4">Sua Lista de Compras</h2>
 
-            {/* Display error message if 'error' state is not null */}
+           
             {error && (
                 <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
                     <strong className="font-bold">Erro:</strong>

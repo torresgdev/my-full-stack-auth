@@ -8,9 +8,9 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 const DB_HOST = process.env.DB_HOST || 'localhost';
 const DB_PORT = parseInt(process.env.DB_PORT || '5432', 10);
-const DB_USERNAME = process.env.DB_USERNAME || 'myauth_user';
-const DB_PASSWORD = process.env.DB_PASSWORD || 'myauth_password';
-const DB_DATABASE = process.env.DB_DATABASE || 'myauth_db';
+const DB_USERNAME = process.env.DB_USERNAME || 'user';
+const DB_PASSWORD = process.env.DB_PASSWORD || 'password';
+const DB_DATABASE = process.env.DB_DATABASE || 'auth_db';
 const DATABASE_URL = process.env.DATABASE_URL; 
 
 let finalDataSourceOptions: DataSourceOptions; 
