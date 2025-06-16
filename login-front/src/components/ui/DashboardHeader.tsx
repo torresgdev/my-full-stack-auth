@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const DashboardHeader: React.FC = () => {
     const { user, logout } = useAuth(); 
@@ -16,7 +16,9 @@ const DashboardHeader: React.FC = () => {
             <div className="container mx-auto flex justify-between items-center">
               
                 <h1 className="text-2xl font-bold">
-                    Meu Dashboard
+                    <Link to ="/dashboard">
+                        Meu Dashboard
+                    </Link>
                 </h1>
 
               
