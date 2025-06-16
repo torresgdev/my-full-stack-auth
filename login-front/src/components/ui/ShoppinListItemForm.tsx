@@ -28,7 +28,7 @@ const ShoppingListAddItemForm: React.FC<ShoppingListAddItemFormProps> = ({ onIte
   const handleAddItemSubmit = async (data: AddItemFormValues) => {
     try {
         const quantityNum = parseInt(data.quantity);
-        const response = await api.post<ShoppingListItem>('/shoppin-list', {
+        const response = await api.post<ShoppingListItem>('/shopping-list', {
             name: data.name,
             quantity: quantityNum,
         });
