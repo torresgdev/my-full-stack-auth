@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Patch, Body, Param, UseGuards, Request, HttpCode, HttpStatus  } from '@nestjs/common';
+import { Controller, Post, Get, Patch, Body, Param, UseGuards, Request, HttpCode, HttpStatus, Delete  } from '@nestjs/common';
 import { ShoppingListService } from './shopping-list.service';
 import { CreateShoppinListItemDto } from './dto/create-shopping-list-item.dto';
 import { UpdateShoppingListItemDto } from './dto/update-shopping-list-item.dto';
@@ -31,7 +31,7 @@ export class ShoppingListController {
         return this.shoppingListService.update(id, updateDto, req.user.id)
     }
 
-    @Patch(':id')
+    @Delete(':id')
     @HttpCode(HttpStatus.NO_CONTENT)
     remove(@Param('id') id: string, @Request() req) {
         return this.shoppingListService.remove(id, req.user.id)
